@@ -16,12 +16,6 @@ class Game:
         self.board = Board(Game.WIDTH // Game.SQUARE_S, Game.HEIGHT // Game.SQUARE_S)
         self.start = False
 
-        #Draw net
-        self.rect_list = list()
-        for y in range(0, Game.HEIGHT, Game.SQUARE_S):
-            for x in range(0, Game.WIDTH, Game.SQUARE_S):
-                self.rect_list.append(pygame.Rect(x, y, Game.SQUARE_S, Game.SQUARE_S))
-
     def run(self) -> None:
         while True:
             self.handle_events()
@@ -48,16 +42,10 @@ class Game:
     def update(self) -> None:
         if self.start:
             self.board.tick()
-            time.sleep(0.5)
+            time.sleep(0.1)
 
     def render(self) -> None:
         self.screen.fill((0, 0, 0))
-
-        # for i in range(16):
-        #     pygame.draw.rect(screen , (255, 255, 255), pygame.Rect(20 * SQUARE_S, (20 + i) * SQUARE_S, SQUARE_S, SQUARE_S))
-        # for rect in self.rect_list:
-        #     pygame.draw.rect(self.screen, (255, 255, 255), rect, width=1)
-        
         self.board.draw(self.screen, Game.SQUARE_S)
 
 

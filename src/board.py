@@ -20,12 +20,12 @@ class Board:
             for y in range(0, len(self.board[0])):
                 neighbours = self.count_neighbours(x, y)
                 if self.board[x][y] == True:
+                    #if alive and doesn't have 2 or 3 neighbours - die
                     if neighbours != 2 and neighbours != 3:
                         self.commands[(x, y)] = False                
-                        # self.board[x][y] = False
+                #if dead and has 3 neighbours - live
                 elif self.board[x][y] == False and neighbours == 3:
                     self.commands[(x, y)] = True
-                    # self.board[x][y] = True
 
     def count_neighbours(self, x: int, y: int) -> int:
         cnt = 0
@@ -38,11 +38,7 @@ class Board:
         return cnt
 
     def draw(self, surface: Surface, square_size: int) -> None:
-        row = 0
-        while row < len(self.board):
-            col = 0
-            while col < len(self.board[0]):
+        for row in range(0, len(self.board)):
+            for col in range(0, len(self.board[0])):
                 if self.board[row][col] == True:
                     draw.rect(surface, (255, 255, 255), Rect(row * square_size, col * square_size, square_size, square_size))
-                col += 1
-            row += 1
